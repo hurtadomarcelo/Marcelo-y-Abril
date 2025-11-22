@@ -2,19 +2,18 @@
 <html lang="es">
 <head>
   
-
 <style>
     
 /* Fondo general */
 body {
     margin: 0;
     padding: 0;
-    /* MODIFICACIÓN: Añado la pila de fuentes de emojis para asegurar el color */
+    /* MODIFICACIÓN: Pila de fuentes de emojis para asegurar el color */
     font-family: "Segoe UI", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
     
-    /* CAMBIO 1: Fondo totalmente negro */
+    /* Fondo totalmente negro */
     background: #03030f; 
-    /* CAMBIO 2: Color del texto general a blanco para legibilidad */
+    /* Color del texto general a blanco */
     color: #f0f0f0; 
     text-align: center;
 }
@@ -22,32 +21,21 @@ body {
 /* Títulos */
 h1 {
     font-size: 2.5rem;
-    /* CAMBIO 3: Títulos en color claro */
     color: #ffffff; 
-    text-shadow: 1px 1px 5px rgba(255,255,255,0.15); /* Sombra clara para contraste */
+    text-shadow: 1px 1px 5px rgba(255,255,255,0.15);
 }
 
 h2 {
     margin-top: 40px;
-    /* CAMBIO 4: Subtítulos en color claro */
     color: #cccccc;
-}
-
-/* Contenedor principal (no se requiere cambio si no tiene fondo propio) */
-.contenedor {
-    max-width: 900px;
-    margin: auto;
-    padding: 20px;
 }
 
 /* Caja elegante */
 .caja {
-    /* CAMBIO 5: Fondo de la caja a un color oscuro semi-transparente */
     background: rgba(17, 17, 17, 0.85); 
     backdrop-filter: blur(5px);
     padding: 25px;
     border-radius: 20px;
-    /* CAMBIO 6: Sombra de caja más sutil o con glow para fondo oscuro */
     box-shadow: 0 8px 20px rgba(255,255,255,0.05); 
     margin-bottom: 30px;
 }
@@ -57,42 +45,38 @@ p {
     font-size: 1.2rem;
     line-height: 1.6;
     text-align: left;
-    /* Aseguramos que el texto dentro de la caja sea claro */
     color: #f0f0f0; 
 }
 
-/* Música (Ya no es necesario, pero lo dejo por si lo vuelves a usar) */
-audio {
-    margin-top: 15px;
-    width: 90%;
-    max-width: 400px;
+/* --- Solución para Emojis de Corazón en Color --- */
+.corazon-color {
+    /* Fuerza el uso de una fuente de color emoji confiable */
+    font-family: "Noto Color Emoji", sans-serif;
+    font-size: 1.2em; /* Lo hace ligeramente más grande */
 }
 
-/* Carrusel (SLIDING) */
+
+/* --- Estilos para el Carrusel Deslizante (Sliding) --- */
 .carousel-container {
     position: relative;
     width: 90%;
     max-width: 600px;
     margin: 40px auto;
-    overflow: hidden; /* IMPORTANTE: Oculta las imágenes que están fuera de la vista */
+    overflow: hidden; /* Oculta las imágenes que están fuera de vista */
 }
 
-/* Nuevo contenedor para el deslizamiento horizontal (TRACK) */
+/* Contenedor que se desliza */
 .carousel-track {
     display: flex; /* Pone las imágenes en fila */
     transition: transform 0.5s ease-in-out; /* Animación de deslizamiento suave */
-    /* El ancho se controla con JS */
 }
 
 .carousel-img {
-    min-width: 100%; /* IMPORTANTE: Cada imagen ocupa el 100% del ancho del contenedor */
+    min-width: 100%; /* Cada imagen ocupa el 100% del ancho del contenedor */
     width: 100%;
     height: auto;
     border-radius: 20px;
-    /* CAMBIO 7: Sombra de imagen más sutil para fondo oscuro */
     box-shadow: 0 10px 25px rgba(255,255,255,0.1); 
-    /* Eliminamos la transición de opacidad antigua */
-    /* transition: opacity 0.4s ease-in-out; */
 }
 
 /* Flechas */
@@ -101,50 +85,87 @@ audio {
     top: 50%;
     transform: translateY(-50%);
     font-size: 40px;
-    /* CAMBIO 8: Flechas en color claro */
     color: #f0f0f0; 
     cursor: pointer;
     padding: 10px;
-    /* Fondo de las flechas más oscuro o con mayor transparencia */
     background: rgba(255,255,255,0.2); 
     border-radius: 50%;
     user-select: none;
-    z-index: 10; /* Asegura que las flechas estén por encima de las imágenes */
+    z-index: 10; 
 }
 
 .prev { left: 15px; }
 .next { right: 15px; }
 
 .prev:hover, .next:hover {
-    /* Hover más sutil */
     background: rgba(255,255,255,0.4); 
 }
 
-/* Lightbox (se mantiene para fondo oscuro) */
-.lightbox-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.8);
+
+/* --- Estilos para el Reproductor de Audio Personalizado --- */
+
+/* Ocultar el control básico de HTML */
+#custom-audio {
+    display: none; 
+}
+
+/* Contenedor principal del reproductor */
+.custom-player {
     display: flex;
-    justify-content: center;
     align-items: center;
-    z-index: 999;
-}
-
-.lightbox-img {
-    max-width: 90%;
-    max-height: 90%;
+    justify-content: space-between;
+    padding: 15px;
     border-radius: 10px;
-    box-shadow: 0 0 20px rgba(255,255,255,0.4);
-    animation: zoomIn 0.3s ease;
+    background: #1e1e1e; /* Color más oscuro que la caja */
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+    margin-top: 20px;
 }
 
-@keyframes zoomIn {
-    from { transform: scale(0.7); opacity: 0; }
-    to   { transform: scale(1); opacity: 1; }
+/* Botón de Play/Pause */
+.play-btn {
+    background: #4CAF50; /* Color de acento (verde) */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.play-btn:hover {
+    background: #66BB6A;
+}
+
+/* Contenedor de la barra de progreso */
+.progress-bar-container {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    margin: 0 15px;
+    color: #cccccc; /* Color del texto de tiempo */
+}
+
+/* Barra de progreso */
+#progress-bar {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    margin: 0 10px;
+    border-radius: 5px;
+}
+
+/* Estilo del progreso (llenado) en navegadores */
+#progress-bar::-webkit-progress-bar {
+    background-color: #333;
+    border-radius: 5px;
+}
+
+#progress-bar::-webkit-progress-value {
+    background-color: #4CAF50; /* Color de llenado */
+    border-radius: 5px;
 }
   </style>
 
@@ -153,10 +174,10 @@ audio {
   <title>Recuerdo Digital</title>
 </head>
   
-<body></body>
+<body>
 
     <div class="caja">
-        <h1>Te amo amor de mi vida ❤</h1>
+        <h1>Te amo amor de mi vida <span class="corazon-color">❤</span></h1>
     </div>
 
     <div class="carousel-container">
@@ -167,12 +188,21 @@ audio {
     </div>
 
     <div class="caja">
-    
-    <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/2plbrEY59IikOBgBGLjaoe?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-</div>
+        <h2>🎵<span class="corazon-color">❤</span Nuestra Canción<span class="corazon-color">❤</span 🎵</h2>
+        <audio id="custom-audio" src="audio/music.mp3"></audio> 
+        
+        <div class="custom-player">
+            <button id="play-pause-btn" class="play-btn">▶️</button>
+            <div class="progress-bar-container">
+                <span id="current-time">0:00</span>
+                <progress id="progress-bar" value="0" max="100"></progress>
+                <span id="duration">0:00</span>
+            </div>
+        </div>
+    </div>
 
     <div class="caja">
-        <h2></h2>
+        <h2>Te dedico esto...<span class="corazon-color">❤</span</h2>
         <p>Mi amor queria decirte que sos una chica fabulosa en todos los sentidos, me demostraste que la vida pueder ser linda a pesar de todo malo y oscura que es... agradezco a la vida que te haya puesto adelante de mi vida 
     porque fue uno de los acontecimientos mas especiales y bonitos de mi vida, serías el primero dentro de todo lo vivido, hiciste en mi un cambio enorme en mi vida ya que me diste vuelta el mundo en tan poco tiempo y
     entraste en mi corazón para dejar tu marca en ella, sos una persona increíble, hermosa por dentro y por fuera, con un corazón gigante y una dulzura que me enamora cada día mas de vos, me encanta como sos, tu forma de ser, 
@@ -189,15 +219,15 @@ audio {
     tenia que ser así para valorar lo que tengo ahora, para darme cuenta de lo afortunado que soy de tenerte a vos en mi vida. Sos mi mayor bendición, mi mayor regalo, mi mayor alegría, mi mayor amor. Y por eso no necesito nada mas que tenerte a vos a mi lado y que sigamos construyendo este amor tan lindo que tenemos.
     Te amo mucho amor mio, gracias por todo lo que me diste y por todo lo que me has enseñado, siempre estaré agradecido contigo por haber entrado en mi vida y haberme hecho tan feliz. Eres lo mejor que me pasó en la vida y siempre te voy a amar con todo mi corazón. Siempre estaré para ti cuando
     me necesites, en las buenas y más en las malas, solo debes decir mi nombre y sabes que muevo cielo y tierra por vos, porque te amo con todo mi ser y quiero que seas feliz siempre, aunque eso signifique sacrificar mi propia felicidad. Porque tu felicidad es mi felicidad.
-    Te amo mucho amor mi vida,mi gordita, mi jugadora favorita, mi mundo y por sobre todo te amo a vos Abril Rodriguez❤... gracias por todo.
+    Te amo mucho amor mi vida,mi gordita, mi jugadora favorita, mi mundo y por sobre todo te amo a vos Abril Rodriguez<span class="corazon-color">❤</span>... gracias por todo.
     Atte. Tu niño. </p>
     </div>
 
-</div>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
+    // --- Variables Comunes ---
     const fotos = [
         "images/foto1.jpeg",
         "images/foto2.jpeg",
@@ -208,15 +238,17 @@ document.addEventListener("DOMContentLoaded", () => {
         "images/foto7.jpeg"
     ];
 
+    // --- Lógica del Carrusel (Sliding) ---
     let indice = 0;
     const track = document.getElementById("carousel-track");
     const prev = document.querySelector(".prev");
     const next = document.querySelector(".next");
-    let intervaloAutomatico; // Declarada aquí para ser accesible globalmente
-    const TIEMPO_ESPERA = 100; // 4 segundos de espera antes de reanudar
-    const TIEMPO_PASE = 3500; // 3.5 segundos entre cada foto automática
+    let intervaloAutomatico; 
+    let timeoutReanudar; 
+    const TIEMPO_ESPERA = 4000; 
+    const TIEMPO_PASE = 3500; 
 
-    // 1. Crear todas las imágenes y añadirlas al track (se mantiene)
+    // 1. Crear todas las imágenes y añadirlas al track
     fotos.forEach(src => {
         const img = document.createElement('img');
         img.src = src;
@@ -224,57 +256,118 @@ document.addEventListener("DOMContentLoaded", () => {
         track.appendChild(img);
     });
 
-    // Función que mueve el track horizontalmente (se mantiene)
+    // Función que mueve el track horizontalmente
     function mostrar(n) {
         const desplazamiento = -n * 100; 
         track.style.transform = `translateX(${desplazamiento}%)`;
     }
     
-    // Función para avanzar la foto automáticamente (se mantiene)
+    // Función para avanzar la foto automáticamente
     function siguienteFoto() {
         indice = (indice + 1) % fotos.length;
         mostrar(indice);
     }
     
-    // Función para iniciar el pase automático (MODIFICADA)
+    // Función para iniciar el pase automático
     function iniciarIntervalo() {
-        // Detiene el intervalo anterior si existe
         if (intervaloAutomatico) clearInterval(intervaloAutomatico); 
-        // Inicia el nuevo intervalo
         intervaloAutomatico = setInterval(siguienteFoto, TIEMPO_PASE);
     }
 
-    // Nueva función para reiniciar el temporizador al hacer clic manual
+    // Función para reiniciar el temporizador al hacer clic manual
     const manejarClick = () => {
         // 1. Detiene el intervalo automático actual
         clearInterval(intervaloAutomatico);
 
-        // 2. Establece un nuevo temporizador (setTimeout)
-        // que ESPERARÁ TIEMPO_ESPERA (4 segundos) y luego llamará a iniciarIntervalo()
-        setTimeout(iniciarIntervalo, TIEMPO_ESPERA);
+        // 2. Limpia el temporizador de reanudación anterior
+        if (timeoutReanudar) clearTimeout(timeoutReanudar);
+
+        // 3. Establece un nuevo temporizador que reanudará el pase automático después de la espera
+        timeoutReanudar = setTimeout(iniciarIntervalo, TIEMPO_ESPERA);
     };
 
     prev.onclick = () => {
-        manejarClick(); // Detiene y pone el temporizador de reanudación
+        manejarClick(); 
         indice = (indice - 1 + fotos.length) % fotos.length;
         mostrar(indice);
     };
 
     next.onclick = () => {
-        manejarClick(); // Detiene y pone el temporizador de reanudación
+        manejarClick(); 
         indice = (indice + 1) % fotos.length;
         mostrar(indice);
     };
 
-    // Inicia el carrusel la primera vez al cargar la página
+    // Inicia el carrusel al cargar la página
     mostrar(indice); 
     iniciarIntervalo(); 
+
+
+    // --- Lógica del Reproductor de Audio Personalizado ---
+
+    const audio = document.getElementById('custom-audio');
+    const playPauseBtn = document.getElementById('play-pause-btn');
+    const progressBar = document.getElementById('progress-bar');
+    const currentTimeSpan = document.getElementById('current-time');
+    const durationSpan = document.getElementById('duration');
+
+    // Función para formatear el tiempo (segundos a M:SS)
+    function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+    }
+
+    // Evento: Al hacer clic en Play/Pause
+    playPauseBtn.addEventListener('click', () => {
+        if (audio.paused || audio.ended) {
+            audio.play();
+            playPauseBtn.textContent = '⏸️'; // Cambia a icono de pausa
+        } else {
+            audio.pause();
+            playPauseBtn.textContent = '▶️'; // Cambia a icono de play
+        }
+    });
+
+    // Evento: Cuando el audio carga (obtiene la duración)
+    audio.addEventListener('loadedmetadata', () => {
+        durationSpan.textContent = formatTime(audio.duration);
+    });
+
+    // Evento: Actualizar la barra de progreso y el tiempo actual
+    audio.addEventListener('timeupdate', () => {
+        // Actualizar la barra
+        const progress = (audio.currentTime / audio.duration) * 100;
+        progressBar.value = progress;
+        
+        // Actualizar el tiempo
+        currentTimeSpan.textContent = formatTime(audio.currentTime);
+    });
+
+    // Evento: El usuario arrastra la barra de progreso
+    progressBar.addEventListener('click', (e) => {
+        const rect = progressBar.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const width = rect.width;
+        const clickRatio = x / width;
+        
+        audio.currentTime = clickRatio * audio.duration;
+    });
+
+    // Evento: La canción termina
+    audio.addEventListener('ended', () => {
+        playPauseBtn.textContent = '▶️';
+        audio.currentTime = 0; // Opcional: rebobinar al inicio
+    });
+
+    // Asegurar que el audio cargue metadata después de que el DOM esté listo
+    audio.load();
+
 });
 </script>
 
 </body>
 </html>
-
 
 
 
