@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="es">
+<head>
+  
+
+<style>
+    
+/* Fondo general */
+body {
+    margin: 0;
+    padding: 0;
+    /* MODIFICACIÓN: Añado la pila de fuentes de emojis para asegurar el color */
+    font-family: "Segoe UI", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
+    
+    /* CAMBIO 1: Fondo totalmente negro */
+    background: #03030f; 
+    /* CAMBIO 2: Color del texto general a blanco para legibilidad */
+    color: #f0f0f0; 
+    text-align: center;
+}
+
+/* Títulos */
+h1 {
+    font-size: 2.5rem;
+    /* CAMBIO 3: Títulos en color claro */
+    color: #ffffff; 
+    text-shadow: 1px 1px 5px rgba(255,255,255,0.15); /* Sombra clara para contraste */
+}
+
+h2 {
+    margin-top: 40px;
+    /* CAMBIO 4: Subtítulos en color claro */
+    color: #cccccc;
+}
+
+/* Contenedor principal (no se requiere cambio si no tiene fondo propio) */
+.contenedor {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Caja elegante */
+.caja {
+    /* CAMBIO 5: Fondo de la caja a un color oscuro semi-transparente */
+    background: rgba(17, 17, 17, 0.85); 
+    backdrop-filter: blur(5px);
+    padding: 25px;
+    border-radius: 20px;
+    /* CAMBIO 6: Sombra de caja más sutil o con glow para fondo oscuro */
+    box-shadow: 0 8px 20px rgba(255,255,255,0.05); 
+    margin-bottom: 30px;
+}
+
+/* Texto del mensaje */
+p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    text-align: left;
+    /* Aseguramos que el texto dentro de la caja sea claro */
+    color: #f0f0f0; 
+}
+
+/* Música (Ya no es necesario, pero lo dejo por si lo vuelves a usar) */
+audio {
+    margin-top: 15px;
+    width: 90%;
+    max-width: 400px;
+}
+
+/* Carrusel (SLIDING) */
+.carousel-container {
+    position: relative;
+    width: 90%;
+    max-width: 600px;
+    margin: 40px auto;
+    overflow: hidden; /* IMPORTANTE: Oculta las imágenes que están fuera de la vista */
+}
+
+/* Nuevo contenedor para el deslizamiento horizontal (TRACK) */
+.carousel-track {
+    display: flex; /* Pone las imágenes en fila */
+    transition: transform 0.5s ease-in-out; /* Animación de deslizamiento suave */
+    /* El ancho se controla con JS */
+}
+
+.carousel-img {
+    min-width: 100%; /* IMPORTANTE: Cada imagen ocupa el 100% del ancho del contenedor */
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    /* CAMBIO 7: Sombra de imagen más sutil para fondo oscuro */
+    box-shadow: 0 10px 25px rgba(255,255,255,0.1); 
+    /* Eliminamos la transición de opacidad antigua */
+    /* transition: opacity 0.4s ease-in-out; */
+}
+
+/* Flechas */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 40px;
+    /* CAMBIO 8: Flechas en color claro */
+    color: #f0f0f0; 
+    cursor: pointer;
+    padding: 10px;
+    /* Fondo de las flechas más oscuro o con mayor transparencia */
+    background: rgba(255,255,255,0.2); 
+    border-radius: 50%;
+    user-select: none;
+    z-index: 10; /* Asegura que las flechas estén por encima de las imágenes */
+}
+
+.prev { left: 15px; }
+.next { right: 15px; }
+
+.prev:hover, .next:hover {
+    /* Hover más sutil */
+    background: rgba(255,255,255,0.4); 
+}
+
+/* Lightbox (se mantiene para fondo oscuro) */
+.lightbox-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.lightbox-img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255,255,255,0.4);
+    animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.7); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+}
+  </style>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Recuerdo Digital</title>
+</head>
+  
+<body></body>
+
+    <div class="caja">
+        <h1>Te amo amor de mi vida ❤</h1>
+    </div>
+
+    <div class="carousel-container">
+        <span class="prev">❮</span>
+        <div class="carousel-track" id="carousel-track">
+            </div>
+        <span class="next">❯</span>
+    </div>
+
+    <div class="caja">
+    
+    <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/2plbrEY59IikOBgBGLjaoe?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+</div>
+
+    <div class="caja">
+        <h2></h2>
+        <p>Mi amor queria decirte que sos una chica fabulosa en todos los sentidos, me demostraste que la vida pueder ser linda a pesar de todo malo y oscura que es... agradezco a la vida que te haya puesto adelante de mi vida 
+    porque fue uno de los acontecimientos mas especiales y bonitos de mi vida, serías el primero dentro de todo lo vivido, hiciste en mi un cambio enorme en mi vida ya que me diste vuelta el mundo en tan poco tiempo y
+    entraste en mi corazón para dejar tu marca en ella, sos una persona increíble, hermosa por dentro y por fuera, con un corazón gigante y una dulzura que me enamora cada día mas de vos, me encanta como sos, tu forma de ser, 
+    tu sonrisa, tu mirada, tu risa, tu manera de pensar, tu forma de ver la vida, me encanta todo de vos y cada día que pasa me doy cuenta que te amo mas y mas, sos lo mejor que me paso en la vida y no quiero perderte, 
+    quiero estar a tu lado en las buenas y en las malas, apoyarte en todo lo que necesites y hacerte feliz cada día de mi vida.
+    Tengo muchas cosas de las cual poder escribir que me llevaría dias tras dias describir lo que siento y pienso de ti, pero la forma en la que hago para desmostrarte lo que siento fueron todas las cosas que hice por ti 
+    y no fue para que me ames por ello, sino para que sepas lo mucho te amo y siento por vos. Abril sos la mujer que va a tener un lugar en mi corazón hasta que este deje de latir, ya que sos, fuiste y serás mi mayor tesoro y logro en la vida.
+    Simplemente te amo de forma incondicional y haría lo que fuese con tal de poder verte sonreír... Porque esas sonrisas fueron los motivos por el que mi mundo no se cae abajo. Si realmente hago todo mi esfuerzo es porque te quiero a vos,
+    porque sos vos y solamente PORQUE SOS TÚ LA QUE QUIERO EN MI VIDA.  </p>
+        <p>Lo que tengo con vos no lo tuve con nadie, no necesito buscar en mi pasado, no necesito pensarlo mucho, jamas amé ni me amaron de una manera tan libre y sincera como lo hacemos nosotros, jamás imaginé poder ser yo al lado de alguien que no me juzgue,
+    que me acepte tal cual soy, con mis defectos y virtudes, con mis locuras y mis sueños, con mis miedos y mis esperanzas, sos la persona que me hace sentir vivo, que me hace sentir amado, que me hace sentir completo, por eso me resulta fácil escribirte estas palabras
+    porque con vos todo es muy fácil, porque al lado tuyo nada parece complicado. Yo vengo de unas cuantas batallas, de todas salí perdiendo una parte de mi, pero al lado tuyo como parte de arte de magia esas partes se volvieron a juntarse y me siento completo nuevamente.
+    Al lado tuyo siento que nunca me faltó nada hasta que no sentí el calor de un abrazo tuyo, no fui consciente del frío que fui capaz de soportar. A veces por no decir casi siempre me pregunto cómo fui capaz de estar tanto tiempo en este mundo sin vos al lado mío, tal vez
+    tenia que ser así para valorar lo que tengo ahora, para darme cuenta de lo afortunado que soy de tenerte a vos en mi vida. Sos mi mayor bendición, mi mayor regalo, mi mayor alegría, mi mayor amor. Y por eso no necesito nada mas que tenerte a vos a mi lado y que sigamos construyendo este amor tan lindo que tenemos.
+    Te amo mucho amor mio, gracias por todo lo que me diste y por todo lo que me has enseñado, siempre estaré agradecido contigo por haber entrado en mi vida y haberme hecho tan feliz. Eres lo mejor que me pasó en la vida y siempre te voy a amar con todo mi corazón. Siempre estaré para ti cuando
+    me necesites, en las buenas y más en las malas, solo debes decir mi nombre y sabes que muevo cielo y tierra por vos, porque te amo con todo mi ser y quiero que seas feliz siempre, aunque eso signifique sacrificar mi propia felicidad. Porque tu felicidad es mi felicidad.
+    Te amo mucho amor mi vida,mi gordita, mi jugadora favorita, mi mundo y por sobre todo te amo a vos Abril Rodriguez❤... gracias por todo.
+    Atte. Tu niño. </p>
+    </div>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const fotos = [
+        "images/foto1.jpeg",
+        "images/foto2.jpeg",
+        "images/foto3.jpeg",
+        "images/foto4.jpeg",
+        "images/foto5.jpeg",
+        "images/foto6.jpeg",
+        "images/foto7.jpeg"
+    ];
+
+    let indice = 0;
+    const track = document.getElementById("carousel-track");
+    const prev = document.querySelector(".prev");
+    const next = document.querySelector(".next");
+    let intervaloAutomatico; // Declarada aquí para ser accesible globalmente
+    const TIEMPO_ESPERA = 100; // 4 segundos de espera antes de reanudar
+    const TIEMPO_PASE = 3500; // 3.5 segundos entre cada foto automática
+
+    // 1. Crear todas las imágenes y añadirlas al track (se mantiene)
+    fotos.forEach(src => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.classList.add('carousel-img');
+        track.appendChild(img);
+    });
+
+    // Función que mueve el track horizontalmente (se mantiene)
+    function mostrar(n) {
+        const desplazamiento = -n * 100; 
+        track.style.transform = `translateX(${desplazamiento}%)`;
+    }
+    
+    // Función para avanzar la foto automáticamente (se mantiene)
+    function siguienteFoto() {
+        indice = (indice + 1) % fotos.length;
+        mostrar(indice);
+    }
+    
+    // Función para iniciar el pase automático (MODIFICADA)
+    function iniciarIntervalo() {
+        // Detiene el intervalo anterior si existe
+        if (intervaloAutomatico) clearInterval(intervaloAutomatico); 
+        // Inicia el nuevo intervalo
+        intervaloAutomatico = setInterval(siguienteFoto, TIEMPO_PASE);
+    }
+
+    // Nueva función para reiniciar el temporizador al hacer clic manual
+    const manejarClick = () => {
+        // 1. Detiene el intervalo automático actual
+        clearInterval(intervaloAutomatico);
+
+        // 2. Establece un nuevo temporizador (setTimeout)
+        // que ESPERARÁ TIEMPO_ESPERA (4 segundos) y luego llamará a iniciarIntervalo()
+        setTimeout(iniciarIntervalo, TIEMPO_ESPERA);
+    };
+
+    prev.onclick = () => {
+        manejarClick(); // Detiene y pone el temporizador de reanudación
+        indice = (indice - 1 + fotos.length) % fotos.length;
+        mostrar(indice);
+    };
+
+    next.onclick = () => {
+        manejarClick(); // Detiene y pone el temporizador de reanudación
+        indice = (indice + 1) % fotos.length;
+        mostrar(indice);
+    };
+
+    // Inicia el carrusel la primera vez al cargar la página
+    mostrar(indice); 
+    iniciarIntervalo(); 
+});
+</script>
+
+</body>
+</html>
+
+
+
+
