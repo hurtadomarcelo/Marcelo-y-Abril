@@ -8,7 +8,7 @@
 body {
     margin: 0;
     padding: 0;
-    /* MODIFICACIÓN: Pila de fuentes de emojis para asegurar el color */
+    /* Pila de fuentes de emojis para asegurar el color */
     font-family: "Segoe UI", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
     
     /* Fondo totalmente negro */
@@ -48,11 +48,27 @@ p {
     color: #f0f0f0; 
 }
 
-/* --- Solución para Emojis de Corazón en Color --- */
-.corazon-color {
-    /* Fuerza el uso de una fuente de color emoji confiable */
+/* --- Estilos para Emojis de Corazón en Color --- */
+/* Esta clase se usó para asegurar que los emojis se vean en color */
+.corazon-color, .icocor1 {
     font-family: "Noto Color Emoji", sans-serif;
-    font-size: 1.5em; /* Lo hace ligeramente más grande */
+    font-size: 1.2em; /* Hace que los corazones sean un poco más grandes */
+}
+
+/* --- Estilos para el Contador de Tiempo Real --- */
+.timer-display {
+    font-family: monospace; 
+    font-size: 1.5rem; 
+    line-height: 1.5;
+    color: #FFC0CB; /* Color rosado */
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(255, 192, 203, 0.1); 
+}
+#countdown-timer span {
+    color: #FFFFFF; 
 }
 
 
@@ -62,17 +78,17 @@ p {
     width: 90%;
     max-width: 600px;
     margin: 40px auto;
-    overflow: hidden; /* Oculta las imágenes que están fuera de vista */
+    overflow: hidden; 
 }
 
 /* Contenedor que se desliza */
 .carousel-track {
-    display: flex; /* Pone las imágenes en fila */
-    transition: transform 0.5s ease-in-out; /* Animación de deslizamiento suave */
+    display: flex;
+    transition: transform 0.5s ease-in-out;
 }
 
 .carousel-img {
-    min-width: 100%; /* Cada imagen ocupa el 100% del ancho del contenedor */
+    min-width: 100%;
     width: 100%;
     height: auto;
     border-radius: 20px;
@@ -116,14 +132,14 @@ p {
     justify-content: space-between;
     padding: 15px;
     border-radius: 10px;
-    background: #1e1e1e; /* Color más oscuro que la caja */
+    background: #1e1e1e;
     box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
     margin-top: 20px;
 }
 
 /* Botón de Play/Pause */
 .play-btn {
-    background: #4CAF50; /* Color de acento (verde) */
+    background: #4CAF50; 
     color: white;
     border: none;
     border-radius: 50%;
@@ -144,7 +160,7 @@ p {
     align-items: center;
     flex-grow: 1;
     margin: 0 15px;
-    color: #cccccc; /* Color del texto de tiempo */
+    color: #cccccc; 
 }
 
 /* Barra de progreso */
@@ -164,7 +180,7 @@ p {
 }
 
 #progress-bar::-webkit-progress-value {
-    background-color: #4CAF50; /* Color de llenado */
+    background-color: #4CAF50; 
     border-radius: 5px;
 }
   </style>
@@ -180,6 +196,11 @@ p {
         <h1>Te amo amor de mi vida <span class="icocor1">&#129505;</span></h1>
     </div>
 
+    <div class="caja">
+        <div id="countdown-timer" class="timer-display">
+            Cargando el contador...
+        </div>
+    </div>
     <div class="carousel-container">
         <span class="prev">❮</span>
         <div class="carousel-track" id="carousel-track">
@@ -227,7 +248,76 @@ p {
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
-    // --- Variables Comunes ---
+    // --- Lógica del Contador de Tiempo Real ---
+    
+    // 🛑 1. CONFIGURA ESTA FECHA CON SU FECHA DE INICIO 🛑
+    // Ejemplo: const startDate = new Date("November 22, 2024 12:00:00"); 
+    // Usando una fecha de ejemplo de hace 1 año, 5 meses, 22 días para que se parezca a tu imagen:
+    const startDate = new Date("June 1, 2024 00:00:00"); 
+
+    const timerDisplay = document.getElementById('countdown-timer');
+
+    function updateTimeElapsed() {
+        const now = new Date();
+        const difference = now.getTime() - startDate.getTime(); 
+
+        if (difference < 0) {
+            timerDisplay.innerHTML = "La fecha de inicio aún no ha llegado. Revisa la configuración.";
+            return;
+        }
+
+        const totalSeconds = Math.floor(difference / 1000);
+        
+        // --- CÁLCULO DE UNIDADES DE TIEMPO (aproximado pero legible) ---
+        
+        const secondsInYear = 31557600; // 365.25 * 24 * 3600
+        const secondsInMonth = 2629800; // 30.44 * 24 * 3600
+        const secondsInDay = 86400;
+
+        let remainingSeconds = totalSeconds;
+
+        const years = Math.floor(remainingSeconds / secondsInYear);
+        remainingSeconds %= secondsInYear;
+
+        const months = Math.floor(remainingSeconds / secondsInMonth);
+        remainingSeconds %= secondsInMonth;
+
+        const days = Math.floor(remainingSeconds / secondsInDay);
+        remainingSeconds %= secondsInDay;
+        
+        const hours = Math.floor(remainingSeconds / 3600);
+        remainingSeconds %= 3600;
+
+        const minutes = Math.floor(remainingSeconds / 60);
+        const secs = remainingSeconds % 60;
+
+
+        // --- CREACIÓN DEL TEXTO DE SALIDA ---
+        
+        // Función auxiliar para pluralizar
+        function pluralize(count, unit) {
+            return count === 1 ? unit : unit + 's';
+        }
+
+        const output = `
+            ${years} ${pluralize(years, 'year')}, 
+            ${months} ${pluralize(months, 'month')}, 
+            ${days} ${pluralize(days, 'day')}, 
+            ${hours} ${pluralize(hours, 'hour')}, 
+            ${minutes} ${pluralize(minutes, 'minute')} e 
+            ${secs} ${pluralize(secs, 'second')}
+        `;
+        
+        timerDisplay.textContent = output;
+    }
+    
+    // Iniciar el contador cada segundo
+    updateTimeElapsed(); 
+    setInterval(updateTimeElapsed, 1000);
+    
+    
+    // --- Lógica del Carrusel (Sliding) ---
+
     const fotos = [
         "images/foto1.jpeg",
         "images/foto2.jpeg",
@@ -238,14 +328,13 @@ document.addEventListener("DOMContentLoaded", () => {
         "images/foto7.jpeg"
     ];
 
-    // --- Lógica del Carrusel (Sliding) ---
     let indice = 0;
     const track = document.getElementById("carousel-track");
     const prev = document.querySelector(".prev");
     const next = document.querySelector(".next");
     let intervaloAutomatico; 
     let timeoutReanudar; 
-    const TIEMPO_ESPERA = 100; 
+    const TIEMPO_ESPERA = 150; 
     const TIEMPO_PASE = 3500; 
 
     // 1. Crear todas las imágenes y añadirlas al track
@@ -276,13 +365,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Función para reiniciar el temporizador al hacer clic manual
     const manejarClick = () => {
-        // 1. Detiene el intervalo automático actual
         clearInterval(intervaloAutomatico);
-
-        // 2. Limpia el temporizador de reanudación anterior
         if (timeoutReanudar) clearTimeout(timeoutReanudar);
-
-        // 3. Establece un nuevo temporizador que reanudará el pase automático después de la espera
         timeoutReanudar = setTimeout(iniciarIntervalo, TIEMPO_ESPERA);
     };
 
@@ -368,6 +452,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
+
 
 
 
