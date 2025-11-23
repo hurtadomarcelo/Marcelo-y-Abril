@@ -48,7 +48,7 @@ p {
     color: #f0f0f0; 
 }
 
-/* --- Estilos para Emojis de Corazón en Color --- */
+/* --- Solución para Emojis de Corazón en Color --- */
 /* Esta clase se usó para asegurar que los emojis se vean en color */
 .corazon-color, .icocor1 {
     font-family: "Noto Color Emoji", sans-serif;
@@ -251,8 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- Lógica del Contador de Tiempo Real ---
     
     // 🛑 1. CONFIGURA ESTA FECHA CON SU FECHA DE INICIO 🛑
-    // Ejemplo: const startDate = new Date("November 22, 2024 12:00:00"); 
-    // Usando una fecha de ejemplo de hace 1 año, 5 meses, 22 días para que se parezca a tu imagen:
+    // ¡DEBES EDITAR ESTA LÍNEA! Ejemplo: const startDate = new Date("November 22, 2024 12:00:00"); 
     const startDate = new Date("June 1, 2024 00:00:00"); 
 
     const timerDisplay = document.getElementById('countdown-timer');
@@ -268,10 +267,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const totalSeconds = Math.floor(difference / 1000);
         
-        // --- CÁLCULO DE UNIDADES DE TIEMPO (aproximado pero legible) ---
+        // --- CÁLCULO DE UNIDADES DE TIEMPO (más preciso) ---
         
-        const secondsInYear = 31557600; // 365.25 * 24 * 3600
-        const secondsInMonth = 2629800; // 30.44 * 24 * 3600
+        const secondsInYear = 31557600; 
+        const secondsInMonth = 2629800; 
         const secondsInDay = 86400;
 
         let remainingSeconds = totalSeconds;
@@ -292,20 +291,20 @@ document.addEventListener("DOMContentLoaded", () => {
         const secs = remainingSeconds % 60;
 
 
-        // --- CREACIÓN DEL TEXTO DE SALIDA ---
+        // --- CREACIÓN DEL TEXTO DE SALIDA EN ESPAÑOL ---
         
         // Función auxiliar para pluralizar
-        function pluralize(count, unit) {
-            return count === 1 ? unit : unit + 's';
+        function pluralize(count, singular, plural) {
+            return count === 1 ? singular : plural;
         }
 
         const output = `
-            ${years} ${pluralize(years, 'años')}, 
-            ${months} ${pluralize(months, 'meses')}, 
-            ${days} ${pluralize(days, 'dias')}, 
-            ${hours} ${pluralize(hours, 'horas')}, 
-            ${minutes} ${pluralize(minutes, 'minutos')} e 
-            ${secs} ${pluralize(secs, 'segundos')}
+            ${years} ${pluralize(years, 'año', 'años')}, 
+            ${months} ${pluralize(months, 'mes', 'meses')}, 
+            ${days} ${pluralize(days, 'día', 'días')}, 
+            ${hours} ${pluralize(hours, 'hora', 'horas')}, 
+            ${minutes} ${pluralize(minutes, 'minuto', 'minutos')} y 
+            ${secs} ${pluralize(secs, 'segundo', 'segundos')}
         `;
         
         timerDisplay.textContent = output;
@@ -334,7 +333,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const next = document.querySelector(".next");
     let intervaloAutomatico; 
     let timeoutReanudar; 
-    const TIEMPO_ESPERA = 150; 
+    const TIEMPO_ESPERA = 150; // 
     const TIEMPO_PASE = 3500; 
 
     // 1. Crear todas las imágenes y añadirlas al track
